@@ -1,4 +1,32 @@
-baseURL = 'https://example.org/'
+baseURL = 'https://fpgahero.com/'
 languageCode = 'en-us'
-title = 'My New Hugo Site'
+title = 'The FPGA Hero'
 theme = "hugo-bearcub"
+copyright = "fpgahero.com (CC BY-SA 4.0)"
+# Generate a nice robots.txt for SEO
+enableRobotsTXT = true
+
+[params]
+  #favicon = "favicon.png"
+  madeWith = "Made with [Hugo](https://gohugo.io/) and [Bear Cub](https://github.com/clente/hugo-bearcub) | Uses [GoatCounter](https://fpgahero.goatcounter.com)"
+  title = "The FPGA Hero"
+  dateFormat = "2006-01-02"
+
+  # (EXPERIMENTAL) This theme has two options for its CSS styles: "original" and
+  # "herman". The former is what you see on Bear Cub's demo (an optimized
+  # version of Hugo Bear Blog), while the latter has a more modern look based on
+  # Herman Martinus's version of the Blogster Minimal theme for Astro.
+  themeStyle = "herman"
+
+  # (EXPERIMENTAL) This theme is capable of dynamically generating social cards
+  # for posts that don't have `images` defined in their front matter; By setting
+  # `generateSocialCard` to false, you can prevent this behavior. For more
+  # information see layouts/partials/social_card.html
+  generateSocialCard = true
+
+  # Author metadata. This is mostly used for the RSS feed of your site, but the
+  # email is also added to the footer of each post. You can hide the "reply to"
+  # link by using a `hideReply` param in front matter.
+  [params.author]
+    name = "The FPGA Hero" # Your name as shown in the RSS feed metadata
+    #email = "fpgahero@proton.me" # Added to the footer so readers can reply to posts
