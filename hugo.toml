@@ -5,6 +5,7 @@ theme = "hugo-bearcub"
 copyright = "fpgahero.com (CC BY-SA 4.0)"
 # Generate a nice robots.txt for SEO
 enableRobotsTXT = true
+enableEmoji = true
 
 # Setup syntax highlighting without inline styles. For more information about
 # why you'd want to avoid inline styles, see
