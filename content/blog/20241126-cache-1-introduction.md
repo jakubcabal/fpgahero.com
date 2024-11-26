@@ -37,7 +37,7 @@ I will try to explain. Caches seem to be huge, but they still have a limited siz
 capacity of a DRAM chip (a few gigabytes), they're tiny (L3 cache, a few MB). Smaller size is key
 to achieving higher throughput and lower latency, but it has its challenges.
 
-## Why in most cases?
+## The challenge
 
 It's not possible to fit an entire DRAM into a cache :smile:. A cache has to select a subset of memory
 to store, and it has to be smart about choosing this subset. Caches exploit something called data
