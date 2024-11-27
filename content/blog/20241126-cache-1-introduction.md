@@ -18,10 +18,6 @@ there's a performance issue? Let’s add another cache! :smile:” When dealing 
 it’s common to encounter saturation of throughput or pipeline stalls caused by unpredictable
 and high read/write latency. Implementing caches can effectively eliminate this bottleneck in most cases.
 
-Unfortunately, a system as performant, as its weakest point. In modern computing, processors are
-scaling very well. Their performance increased approximately 100x from year 1999. However, it is
-not true for memory systems. From year 1999:
-
 Unfortunately, the performance of a system is limited by its weakest component. In modern computing,
 processors have scaled remarkably well, with their performance increasing by approximately 100 times
 since 1999. However, this improvement does not extend to memory systems. Since 1999:
