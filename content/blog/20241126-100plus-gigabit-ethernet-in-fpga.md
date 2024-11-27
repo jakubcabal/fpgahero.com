@@ -1,20 +1,51 @@
 ---
-title: "100+ Gigabit Ethernet in FPGA"
+title: "100/400 Gigabit Ethernet overview"
 date: "2024-11-25"
 author: "Jakub Cabal"
 tags: 
-  - "ethernet"
-  - "hard-ip"
+  - "Ethernet"
+  - "Gigabit Ethernet"
+  - "400G"
+  - "Hard IP"
+  - "Soft IP"
+  - "QSFP"
+  - "QSFP-DD"
+  - "transceivers"
+  - "SERDES"
 ---
 
 Ethernet is the technology that allows us to connect individual devices to networks and the entire Internet. 
 Different devices use Ethernet for communication, remote control and also for data transfer.
-It is therefore no coincidence that Ethernet support is also found in a wide range of FPGAs.
+Also, FPGA-based applications use Ethernet very often, and newer FPGAs have Ethernet interface support directly built in in the form of hard IP blocks.
 
-Implementing 100 Mbps Ethernet support is not difficult even on the cheapest FPGAs,
-but higher speeds may require more sophisticated hardware.
+The need to transfer larger and larger volumes of data is constantly growing every year.
+For that reason, even Ethernet technology is constantly evolving, and the magical 1 Terabit threshold is just around the corner.
+At the same time, it was not so long ago when the first 100 Gigabit FPGA card appeared in 2013.
+Relatively recently, Intel/Altera introduced its Agilex 7 I-Series FPGA chip with even 400 Gigabit Ethernet support.
 
-## There is no Ethernet like Ethernet
+## How to connect 100/400 Gigabit Ethernet to FPGA?
+
+Over longer distances, 100/400 Gigabit Ethernet is spread exclusively through optical cables.
+Metallic cables can also be used for distances in the order of meters.
+So-called transceivers are used to convert optical signals into electrical signals.
+
+Transceivers in QSFP28 (Quad Small Form-factor Pluggable, 4x 28 Gbps) format are almost exclusively used for 100 Gigabit Ethernet.
+For 400 Gigabit Ethernet, we most often encounter the QSFP-DD format (Quad Small Form-factor Pluggable - Double Density, 8x 56 Gbps),
+however, it is possible that the QSFP112 (4x 112 Gbps) format will replace it over time.
+
+The transceiver format defacto defines the electrical connection of the Ethernet to the FPGA chip.
+Here, extremely fast serial lines are typically used for both directions of communication (RX and TX).
+Today's most advanced FPGAs can communicate over one such serial line at speeds up to 112 Gbps.
+
+The SERDES block in the FPGA converts the serial line to parallel.
+Next is the Ethernet Hard IP (or Soft IP), where the logic to decode the Ethernet protocol is implemented.
+The Ethernet IP can only implement the PCS layer, where [Media-Independent Interface (MII)](https://en.wikipedia.org/wiki/Media-independent_interface) is used as the user interface.
+More often, there is also a MAC layer (PCS+MAC) implemented.
+It performs CRC calculation and checking, statistics computation and many other functions.
+The user interface of the MAC layer is a standard streaming interface (for example, Avalon-ST) that allows the transmission of Ethernet frames.
+Ethernet IP often includes support for RS FEC (Reed-Solomon error correction), which is mandatory for some Ethernet standards.
+
+### There is no Ethernet like Ethernet- TODO
 
 Under the word Ethernet there are also many standards that differ not only in transmission speed.
 Some standards are designed for metallic cables, others for fiber optics.
@@ -26,26 +57,7 @@ for an example you can look at the [list of just those for 100 Gbps transmission
 The engineer should know exactly what he will be working with, but it is not easy to know.
 Fortunately, there are only a few widely used Ethernet standards and we don't see many others in practice.
 
-## Multi Gigabit Ethernet support may vary
-
-Ethernet support in FPGAs can vary not only in transmission speed,
-but also the level of built-in support (within the Hard IP blocks).
-
-Some FPGAs have only fast enough serial lines (SERDES or also referred to as transceivers) to support proper encoding (NRZ, PAM4, etc.),
-and therefore allow to implement PMA layer Ethernet support.
-Better FPGAs have built-in logic to decode the Ethernet protocol at PCS level to the [Media-Independent Interface (MII)](https://en.wikipedia.org/wiki/Media-independent_interface) interface.
-However, the main trend is to provide full support, and so the best FPGAs have dedicated logic for all key Ethernet protocol layers including MAC and sometimes optional RS-FEC layer.
-
-**So once again, briefly to summarize:**
-
-- PMA - support only at the high-speed serial lines (SERDES) level
-- PMA+PCS - support including decoding to MII interface level
-- PMA+PCS+MAC+(RS-FEC) - full Ethernet protocol support
-
-If your FPGA has support for at least the PAM layer, you can implement the remaining ones in the gate array.
-Such solutions (in the form of Soft IP) are provided by FPGA chip manufacturers directly or by other companies for a considerable licensing fee.
-
-## Compare 100+ Gigabit Ethernet Hard IPs
+## 100/400 Gigabit Ethernet Hard IPs - TODO
 
 Among FPGA chip manufacturers, AMD (Xilinx) and Altera (Intel) are the two main companies dominating.
 Both manufacturers now have 100 Gigabit Ethernet-enabled FPGAs in their lineup and
@@ -69,6 +81,10 @@ Let's conclude this post with a table comparing the available 100+ Gigabit Ether
 **Beware, some FPGAs even from the same family may have Ethernet or other Hard IP block support cut.**
 For example, not every Stratix 10 FPGA with H-Tile has a built-in Hard IP block for Ethernet.
 You should always read the manufacturer's documentation carefully.
+
+## How to achieve full throughput - TODO
+
+## Open-source FPGA projects with 100/400 Gigabit Ethernet support - TODO
 
 ----
 
